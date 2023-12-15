@@ -44,6 +44,14 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+        'staff' => [
+            'driver' => 'session',
+            'provider' => 'staffs',
+        ],
+        'client' => [
+            'driver' => 'session',
+            'provider' => 'clients',
+        ],
     ],
 
     /*
@@ -64,14 +72,22 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-        ],
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
+        'staffs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Staff::class,
+        ],
+        'clients' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Client::class,
+        ],
+        // 'users' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\User::class,
+        // ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
