@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('staff', function (Blueprint $table) {
             $table->bigIncrements('staff_id');
             $table->bigInteger('admin_id')->unsigned();
-            $table->foreign('admin_id')->references('admin_id')->on('admin');
+            $table->foreign('admin_id')->references('admin_id')->on('admins');
             $table->string('first_name', 20);
             $table->string('last_name', 20);
             $table->integer('age');
