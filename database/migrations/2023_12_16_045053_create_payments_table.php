@@ -11,17 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clients', function (Blueprint $table) {
-            $table->bigIncrements('client_id');
+        Schema::create('payments', function (Blueprint $table) {
+            $table->bigIncrements('payment_id');
+            $table->bigInteger('rental_id')->unsigned();
+            $table->foreign('rental_id')->references('rental_id')->on('rentals');
             $table->bigInteger('admin_id')->unsigned();
             $table->foreign('admin_id')->references('admin_id')->on('admins');
-            $table->string('first_name', 20);
-            $table->string('last_name', 20);
-            $table->integer('age');
-            $table->string('email', 50)->unique();
-            $table->string('password', 64); // Assuming password hashing using a strong algorithm
-            $table->string('contact_number', 11);
-            $table->string('profile_picture_path');
+            $table->float('payment_amount', 2);
+            $table->float('add_charges', 2);
+            $table->date('payment_date')->default(now());
+            $table->timestamp('payment_time');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('payments');
     }
 };

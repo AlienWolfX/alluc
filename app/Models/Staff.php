@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Staff extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasFactory;
 
     protected $guard = 'staff';
     protected $primaryKey = 'staff_id';

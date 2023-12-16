@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class Admin extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasFactory;
 
     protected $primaryKey = 'admin_id';
 
@@ -27,18 +28,16 @@ class Admin extends Authenticatable
 
     public function clients()
     {
-        // return $this->hasMany(Client::class, 'admin_id');
+        return $this->hasMany(Client::class, 'admin_id');
     }
 
     public function staffMembers()
     {
-        // return $this->hasMany(Staff::class, 'admin_id');
+        return $this->hasMany(Staff::class, 'admin_id');
     }
 
     public function payments()
     {
-        // return $this->hasMany(Payment::class, 'admin_id');
+        return $this->hasMany(Payment::class, 'admin_id');
     }
-
-    // You might want to define other relationships or methods here
 }

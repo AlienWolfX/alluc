@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Client extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasFactory, HasApiTokens;
 
     protected $guard = 'client';
     protected $primaryKey = 'client_id';
@@ -26,6 +28,4 @@ class Client extends Authenticatable
     {
         return $this->belongsTo(Admin::class);
     }
-
-    // You might want to define other relationships or methods here
 }
