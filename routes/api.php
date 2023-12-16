@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::controller(CarController::class)->group(function () {
         Route::post('/cars', 'store');
         Route::delete('/cars/{id}', 'destroy');
+        Route::put('/cars/image/{id}', 'image');
         Route::patch('/cars/status/{id}', 'booked');
     });
 
