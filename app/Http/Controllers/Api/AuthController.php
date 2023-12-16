@@ -11,6 +11,7 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
+
     /**
      * Login the specified user.
      */
@@ -32,6 +33,9 @@ class AuthController extends Controller
         return response($response, 200);
     }
 
+    /**
+     * Logout the specified user.
+     */
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
