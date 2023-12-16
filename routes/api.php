@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CarController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ClientController;
+use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\RentalController;
 
 // Public API
@@ -36,5 +37,9 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::put('/clients/{id}', 'update');
         Route::delete('/clients/{id}', 'destroy');
     });
+
+    // User-specific
+    Route::put('/profile/image', [ProfileController::class, 'image']);
 });
+
 
