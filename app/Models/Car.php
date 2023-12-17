@@ -20,6 +20,7 @@ class Car extends Model
         'color',
         'rate',
         'status',
+        'image'
     ];
 
 }
