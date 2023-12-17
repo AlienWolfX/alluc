@@ -38,7 +38,7 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::delete('/clients/{id}', 'destroy');
     });
 
-    // User-specific
+    // User-specific update image
     Route::put('/profile/image', [ProfileController::class, 'image']);
 });
 

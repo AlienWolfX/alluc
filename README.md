@@ -28,6 +28,10 @@ cp .env.example .env
 php artisan key:generate
 ```
 
+```bash
+php arisan db:seed
+```
+
 ## Security Vulnerabilities
 
 If you discover a security vulnerability within the Car Rental System, please send an e-mail to Allen Cruiz via [admin@cruizallen.me](mailto:admin@cruizallen.me). All security vulnerabilities will be promptly addressed.
