@@ -1,0 +1,207 @@
+@media only screen and (max-width: 760px),
+(min-device-width: 802px) and (max-device-width: 1020px) {
+    /* Force table to not be like tables anymore */
+    table {
+        display: table;
+    }
+
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: table-row;
+    }
+
+    th,
+    td {
+        display: table-cell;
+    }
+
+    .empty {
+        display: none;
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    th {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    tr {
+        border: 1px solid #ccc;
+    }
+
+    td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    /*
+Label the data
+*/
+    td:nth-of-type(1):before {
+        content: "Sunday";
+    }
+
+    td:nth-of-type(2):before {
+        content: "Monday";
+    }
+
+    td:nth-of-type(3):before {
+        content: "Tuesday";
+    }
+
+    td:nth-of-type(4):before {
+        content: "Wednesday";
+    }
+
+    td:nth-of-type(5):before {
+        content: "Thursday";
+    }
+
+    td:nth-of-type(6):before {
+        content: "Friday";
+    }
+
+    td:nth-of-type(7):before {
+        content: "Saturday";
+    }
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    body {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+/* iPads (portrait and landscape) ----------- */
+
+@media only screen and (min-device-width: 802px) and (max-device-width: 1020px) {
+    body {
+        width: 495px;
+    }
+}
+
+@media (min-width:641px) {
+    table {
+        table-layout: fixed;
+    }
+
+    td {
+        width: 33%;
+    }
+}
+
+.row {
+    margin-top: 20px;
+}
+
+.today {
+    background: #eee;
+}
+
+
+body{
+    background:#eee;
+}
+
+.wrapper_calendar{
+    position: fixed; /* Change 'relative' to 'fixed' */
+    top: 50%; /* Adjust as needed */
+    left: 50%; /* Adjust as needed */
+    transform: translate(-50%, -50%); /* Center the element */
+    width: 26%; /*450px*/
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transform: scale(0);
+    transition: transform .5s ease, height 2.s ease;
+    z-index: 100;
+  }
+
+  .wrapper_calendar.active-popup {
+    transform: scale(1);
+    position: fixed; /* Elements add */
+    top: 50%; /* Elements add */
+    left: 50%; /* Elements add */
+    transform: translate(-50%, -50%);/* Elements add */
+  }
+
+  .wrapper_calendar.active {
+    height: 675px;
+    position: fixed;  /* Elements add */
+    top: 50%;   /* Elements add */
+    left: 50%; /* Elements add */
+  }
+  
+  .wrapper_calendar .form-boxed{
+    width: 100%;
+    padding: 8%; /* 40px */
+  }
+
+  .wrapper_calendar .icon-closed{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background: #162938;
+    font-size: 2em;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    z-index: 1;
+  }
+  .container.pop-up-btn {
+    text-align: center; /* Center-align the content */
+    position: relative;
+}
+
+h1 {
+    font-size: 3em; /* Adjust as needed */
+}
+
+
+.btn-wrapper {
+    margin-top: 20px; /* Add space above the buttons */
+}
+
+.btn-wrapper button {
+    margin: 0 40px; /* Add space between the buttons */
+}
+
+.icon-closed {
+    position: absolute;
+    top: 10px; /* Adjust the top position as needed */
+    right: 10px; /* Adjust the right position as needed */
+    cursor: pointer;
+}
+
+.wrapper_calendar.active-popup .form-boxed {
+    display: block; /* Show the popup when active */
+}
+
+@media (max-width: 768px) {
+    .wrapper_calendar {
+        width: 90%; /* Adjust for smaller screens */
+    }
+}
+
+
