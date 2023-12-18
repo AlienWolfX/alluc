@@ -21,14 +21,30 @@ class CarRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'plate_number' => 'required|string',
-            'car_name' => 'required|string',
-            'description' => 'required|string',
-            'car_model_year' => 'required|integer',
-            'color' => 'required|string',
-            'rate' => 'required|numeric',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
-        ];
+        if (request()->routeIs('cars.store')) {
+            return [
+                'plate_number' => 'required|string|unique:cars',
+                'car_name' => 'required|string',
+                'description' => 'required|string',
+                'car_model_year' => 'required|integer',
+                'color' => 'required|string',
+                'rate' => 'required|numeric',
+            ];
+        }
+        else if (request()->routeIs('cars.update')) {
+            return [
+                'plate_number' => 'required|string',
+                'car_name' => 'required|string',
+                'description' => 'required|string',
+                'car_model_year' => 'required|integer',
+                'color' => 'required|string',
+                'rate' => 'required|numeric',
+            ];
+        }
+        else {
+            return [
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ];
+        }
     }
 }
