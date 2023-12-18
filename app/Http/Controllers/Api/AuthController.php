@@ -7,7 +7,6 @@ use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
-use App\Http\Requests\ClientRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
