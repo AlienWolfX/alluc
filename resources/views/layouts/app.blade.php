@@ -39,6 +39,7 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
+    {!! NoCaptcha::renderJs() !!}
 
 </head>
 
@@ -48,17 +49,9 @@
         @include('layouts.resources.header')
 
         <main class="py-4" id="main">
-
-
-            @auth
-                @include('layouts.resources.hero')
-                @include('layouts.resources.icons')
-                @include('layouts.resources.portfolio')
-                @include('layouts.resources.contact')
-            @endauth
-
             @guest
                 @include('layouts.resources.hero')
+                @yield('content')
                 @include('layouts.resources.icons')
                 @include('layouts.resources.about')
                 @include('layouts.resources.whyus')
@@ -66,9 +59,8 @@
                 @include('layouts.resources.team')
                 @include('layouts.resources.faq')
                 @include('layouts.resources.contact')
+                @include('layouts.resources.footer')
             @endguest
-
-            @yield('content')
         </main>
 
 
