@@ -13,6 +13,8 @@ class CarReview extends Model
     protected $primaryKey = 'review_id';
 
     protected $fillable = [
+        'client_id',
+        'car_id',
         'review_score',
         'date_review',
     ];

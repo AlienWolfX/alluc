@@ -28,17 +28,17 @@ class RentalRequest extends FormRequest
                 'rental_status' => 'required|string',
             ];
         }
-        else {
+        else if (request()->method() === 'POST') {
             return [
                 'staff_id' => 'required',
-                'client_id' => 'required',
                 'car_id' => 'required',
                 'rental_date' => 'required|date',
                 'rental_time' => 'required',
-                'return_date' => 'required|date',
-                'return_time' => 'required',
                 'rental_status' => 'required|string',
             ];
+        }
+        else {
+            return [];
         }
     }
 }

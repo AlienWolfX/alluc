@@ -15,6 +15,7 @@ class Client extends Authenticatable
     protected $primaryKey = 'client_id';
 
     protected $fillable = [
+        'admin_id',
         'first_name',
         'last_name',
         'age',

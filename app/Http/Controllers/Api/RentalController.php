@@ -24,7 +24,7 @@ class RentalController extends Controller
     {
         $rental = new Rental;
         $rental->staff_id = $request->staff_id;
-        $rental->client_id = $request->client_id;
+        $rental->client_id = auth()->id();
         $rental->car_id = $request->car_id;
         $rental->rental_date = $request->rental_date;
         $rental->rental_time = $request->rental_time;
@@ -64,7 +64,12 @@ class RentalController extends Controller
      */
     public function destroy(string $id)
     {
-        Rental::destroy($id);
-        return response()->json(['message' => 'Deleted successfully'], 200);
+        $deletedRows = Rental::destroy($id);
+
+        if ($deletedRows > 0) {
+            return response()->json(['message' => 'Rental deleted successfully.'], 200);
+        } else {
+            return response()->json(['message' => 'Rental not found.'], 404);
+        }
     }
 }

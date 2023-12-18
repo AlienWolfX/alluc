@@ -13,6 +13,9 @@ class Rental extends Model
     protected $primaryKey = 'rental_id';
 
     protected $fillable = [
+        'client_id',
+        'staff_id',
+        'car_id',
         'rental_date',
         'rental_time',
         'return_date',

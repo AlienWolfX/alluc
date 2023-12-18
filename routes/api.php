@@ -1,14 +1,16 @@
 <?php
 
+use App\Models\Staff;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CarController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\api\StaffController;
 use App\Http\Controllers\Api\ClientController;
-use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\RentalController;
+use App\Http\Controllers\Api\ProfileController;
 
-// Public API
+// Public API (dili na need mag login)
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [ClientController::class, 'store'])->name('clients.store');
 Route::controller(CarController::class)->group(function () {
@@ -17,13 +19,21 @@ Route::controller(CarController::class)->group(function () {
 });
 
 
-// Private API
+// Private API for Staff (need mag login)
 Route::middleware('auth:sanctum')->group(function() {
 
     Route::post('/logout', [AuthController::class, 'logout']);
 
-    Route::apiResource('/rentals', RentalController::class);
+    // Client ang maka login
+    Route::controller(RentalController::class)->group(function () {
+        Route::get('/rentals', 'index')->name('rentals.index');
+        Route::get('/rentals/{id}', 'show')->name('rentals.show');
+        Route::post('/rentals', 'store')->name('rentals.store');
+        Route::put('/rentals/{id}', 'update')->name('rentals.update');
+        Route::delete('/rentals/{id}', 'destroy')->name('rentals.destroy');
+    });
 
+    // Staff dapat ang maka login
     Route::controller(CarController::class)->group(function () {
         Route::post('/cars', 'store')->name('cars.store');
         Route::delete('/cars/{id}', 'destroy')->name('cars.destroy');
@@ -31,6 +41,16 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::put('/cars/image/{id}', 'image')->name('cars.image');
     });
 
+    // Admin dapat ang maka login
+    Route::controller(StaffController::class)->group(function () {
+        Route::get('/staff', 'index')->name('staff.index');
+        Route::get('/staff/{id}', 'show')->name('staff.show');
+        Route::post('/staff', 'store')->name('staff.store');
+        Route::put('/staff/{id}', 'update')->name('staff.update');
+        Route::delete('/staff/{id}', 'destroy')->name('staff.destroy');
+    });
+
+    // Admin dapat ang maka login
     Route::controller(ClientController::class)->group(function () {
         Route::get('/clients', 'index')->name('clients.index');
         Route::get('/clients/{id}', 'show')->name('clients.show');

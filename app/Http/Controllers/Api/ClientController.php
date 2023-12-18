@@ -69,6 +69,12 @@ class ClientController extends Controller
      */
     public function destroy(string $id)
     {
-        return Client::destroy($id);
+        $deletedRows = Client::destroy($id);
+
+        if ($deletedRows > 0) {
+            return response()->json(['message' => 'Client member deleted successfully.'], 200);
+        } else {
+            return response()->json(['message' => 'Client member not found.'], 404);
+        }
     }
 }

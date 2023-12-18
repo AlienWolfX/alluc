@@ -15,6 +15,7 @@ class Staff extends Authenticatable
     protected $primaryKey = 'staff_id';
 
     protected $fillable = [
+        'admin_id',
         'first_name',
         'last_name',
         'age',

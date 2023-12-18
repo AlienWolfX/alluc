@@ -13,7 +13,7 @@ class ProfileController extends Controller
 {
     public function image(ProfileRequest $request)
     {
-        $user = Auth::user(); // Use Auth::user() to get the authenticated user
+        $user = Auth::user();
 
         if (!$user) {
             return response()->json(['error' => 'Unauthorized'], 401);
