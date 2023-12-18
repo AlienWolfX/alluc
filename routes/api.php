@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Staff;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CarController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\api\StaffController;
 use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\RentalController;
+use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ProfileController;
 
 // Public API (dili na need mag login)
@@ -24,7 +26,7 @@ Route::middleware('auth:sanctum')->group(function() {
 
     Route::post('/logout', [AuthController::class, 'logout']);
 
-    // Client ang maka login
+    // Client dapat ang maka login
     Route::controller(RentalController::class)->group(function () {
         Route::get('/rentals', 'index')->name('rentals.index');
         Route::get('/rentals/{id}', 'show')->name('rentals.show');
@@ -56,6 +58,12 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::get('/clients/{id}', 'show')->name('clients.show');
         Route::put('/clients/{id}', 'update')->name('clients.update');
         Route::delete('/clients/{id}', 'destroy')->name('clients.destroy');
+    });
+
+    // Payments
+    Route::controller(PaymentController::class)->group(function () {
+        Route::get('/payments', 'index')->name('payments.index');
+        Route::post('/payments', 'store')->name('payments.store');
     });
 
     // User-specific update image
