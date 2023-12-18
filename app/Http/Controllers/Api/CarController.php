@@ -25,7 +25,7 @@ class CarController extends Controller
     public function store(CarRequest $request)
     {
         $car = new Car([
-            'staff_id' => '4',
+            'staff_id' => auth()->id(),
             'plate_number' => $request->plate_number,
             'car_name' => $request->car_name,
             'description' => $request->description,
@@ -35,9 +35,15 @@ class CarController extends Controller
             'status' => 'Available',
         ]);
 
-        $this->saveImage($car, $request);
+        if ($request->hasFile('image')) {
+            $this->saveImage($car, $request);
+        }
 
-        return response()->json($car, 201);
+        if ($car->save()) {
+            return response()->json($car, 201);
+        } else {
+            return response()->json(['error' => 'Failed to save car'], 500);
+        }
     }
 
     /**
@@ -48,7 +54,6 @@ class CarController extends Controller
         $car = Car::findOrFail($id);
         $car->fill($request->validated());
         $this->saveImage($car, $request);
-
         return response()->json($car, 200);
     }
 
@@ -73,18 +78,6 @@ class CarController extends Controller
     {
         $car = Car::findOrFail($id);
         $this->saveImage($car, $request);
-        $car->save();
-
-        return response()->json($car, 201);
-    }
-
-    /**
-     * Change Status.
-     */
-    public function booked(string $id)
-    {
-        $car = Car::findOrFail($id);
-        $car->status = 'Booked';
         $car->save();
 
         return response()->json($car, 201);

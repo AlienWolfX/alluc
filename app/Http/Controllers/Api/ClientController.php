@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ClientRequest;
 use Illuminate\Support\Facades\Hash;
 
 class ClientController extends Controller
@@ -20,18 +21,8 @@ class ClientController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ClientRequest $request)
     {
-        $request->validate([
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
-            'age' => 'required|integer',
-            'email' => 'required|email|unique:clients',
-            'password' => 'required|string|min:8',
-            'contact_number' => 'required|string',
-            'profile_picture_path' => 'string',
-        ]);
-
         $client = Client::create([
             'admin_id' => 1,
             'first_name' => $request->first_name,
@@ -57,18 +48,8 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ClientRequest $request, string $id)
     {
-        $request->validate([
-            'first_name' => 'string',
-            'last_name' => 'string',
-            'age' => 'integer',
-            'email' => 'email|unique:clients,email,'.$id,
-            'password' => 'string|min:8',
-            'contact_number' => 'string',
-            'profile_picture_path' => 'string',
-        ]);
-
         $client = Client::findOrFail($id);
         $client->first_name = $request->get('first_name', $client->first_name);
         $client->last_name = $request->get('last_name', $client->last_name);

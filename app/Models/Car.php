@@ -13,6 +13,7 @@ class Car extends Model
     protected $primaryKey = 'car_id';
 
     protected $fillable = [
+        'staff_id',
         'plate_number',
         'car_name',
         'description',

@@ -48,13 +48,8 @@ class RentalController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(RentalRequest $request, string $id)
     {
-        $request->validate([
-            'return_date' => 'required|date',
-            'return_time' => 'required',
-        ]);
-
         $rental = Rental::findOrFail($id);
         $rental->return_date = $request->return_date;
         $rental->return_time = $request->return_time;

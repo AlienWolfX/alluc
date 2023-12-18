@@ -10,7 +10,7 @@ use App\Http\Controllers\Api\RentalController;
 
 // Public API
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/register', [ClientController::class, 'store']);
+Route::post('/register', [ClientController::class, 'store'])->name('clients.store');
 Route::controller(CarController::class)->group(function () {
     Route::get('/cars', 'index');
     Route::get('/cars/{id}', 'show');
@@ -25,18 +25,17 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::apiResource('/rentals', RentalController::class);
 
     Route::controller(CarController::class)->group(function () {
-        Route::post('/cars', 'store');
-        Route::delete('/cars/{id}', 'destroy');
-        Route::put('/cars/{id}', 'update');
-        Route::put('/cars/image/{id}', 'image');
-        Route::patch('/cars/status/{id}', 'booked');
+        Route::post('/cars', 'store')->name('cars.store');
+        Route::delete('/cars/{id}', 'destroy')->name('cars.destroy');
+        Route::put('/cars/{id}', 'update')->name('cars.update');
+        Route::put('/cars/image/{id}', 'image')->name('cars.image');
     });
 
     Route::controller(ClientController::class)->group(function () {
-        Route::get('/clients', 'index');
-        Route::get('/clients/{id}', 'show');
-        Route::put('/clients/{id}', 'update');
-        Route::delete('/clients/{id}', 'destroy');
+        Route::get('/clients', 'index')->name('clients.index');
+        Route::get('/clients/{id}', 'show')->name('clients.show');
+        Route::put('/clients/{id}', 'update')->name('clients.update');
+        Route::delete('/clients/{id}', 'destroy')->name('clients.destroy');
     });
 
     // User-specific update image

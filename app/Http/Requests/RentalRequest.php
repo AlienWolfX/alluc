@@ -21,15 +21,24 @@ class RentalRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'staff_id' => 'required',
-            'client_id' => 'required',
-            'car_id' => 'required',
-            'rental_date' => 'required|date',
-            'rental_time' => 'required',
-            'return_date' => 'required|date',
-            'return_time' => 'required',
-            'rental_status' => 'required|string',
-        ];
+        if (request()->method() === 'PUT') {
+            return [
+                'return_date' => 'required|date',
+                'return_time' => 'required',
+                'rental_status' => 'required|string',
+            ];
+        }
+        else {
+            return [
+                'staff_id' => 'required',
+                'client_id' => 'required',
+                'car_id' => 'required',
+                'rental_date' => 'required|date',
+                'rental_time' => 'required',
+                'return_date' => 'required|date',
+                'return_time' => 'required',
+                'rental_status' => 'required|string',
+            ];
+        }
     }
 }

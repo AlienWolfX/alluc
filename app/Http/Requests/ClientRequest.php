@@ -21,9 +21,31 @@ class ClientRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'email' => 'required|email',
-            'password' => 'required',
-        ];
+        if (request()->routeIs("clients.update")) {
+            return [
+                'first_name' => 'string',
+                'last_name' => 'string',
+                'age' => 'integer',
+                'email' => 'email|string',
+                'password' => 'string|min:8',
+                'contact_number' => 'string',
+            ];
+        }
+        else if (request()->routeIs("clients.store")) {
+            return [
+                'first_name' => 'required|string',
+                'last_name' => 'required|string',
+                'age' => 'required|integer',
+                'email' => 'required|email|string|unique:clients',
+                'password' => 'required|string|min:8',
+                'contact_number' => 'required|string',
+            ];
+        }
+        else {
+            return [
+                'email' => 'required|email',
+                'password' => 'required|string|min:8',
+            ];
+        }
     }
 }
