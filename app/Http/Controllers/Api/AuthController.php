@@ -23,18 +23,18 @@ class AuthController extends Controller
 
         if ($client && Hash::check($request->password, $client->password)) {
             $response = [
-                'user' => $client,
-                'token' => $client->createToken('auth_token')->plainTextToken,
+                'client' => $client,
+                'client_token' => $client->createToken('auth_token')->plainTextToken,
             ];
         } elseif ($staff && Hash::check($request->password, $staff->password)) {
             $response = [
-                'user' => $staff,
-                'token' => $staff->createToken('auth_token')->plainTextToken,
+                'staff' => $staff,
+                'staff_token' => $staff->createToken('auth_token')->plainTextToken,
             ];
         } elseif ($admin && Hash::check($request->password, $admin->password)) {
             $response = [
-                'user' => $admin,
-                'token' => $admin->createToken('auth_token')->plainTextToken,
+                'admin' => $admin,
+                'admin_token' => $admin->createToken('auth_token')->plainTextToken,
             ];
         } else {
             throw ValidationException::withMessages([

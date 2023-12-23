@@ -31,4 +31,12 @@ class ProfileController extends Controller
             'image' => $user->profile_picture_path
         ]);
     }
+
+       /**
+     * Display the specified information of the token bearer.
+     */
+    public function show(Request $request)
+    {
+        return $request->user();
+    }
 }

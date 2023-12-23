@@ -24,7 +24,7 @@ Route::controller(CarController::class)->group(function () {
 // Private API for Staff (need mag login)
 Route::middleware('auth:sanctum')->group(function() {
 
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/logout', [AuthController::class, 'logout']);
 
     // Client dapat ang maka login
     Route::controller(RentalController::class)->group(function () {
@@ -68,6 +68,7 @@ Route::middleware('auth:sanctum')->group(function() {
 
     // User-specific update image
     Route::put('/profile/image', [ProfileController::class, 'image']);
+    Route::get('/profile/show', [ProfileController::class, 'show']);
 });
 
 
