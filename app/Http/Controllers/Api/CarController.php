@@ -53,6 +53,7 @@ class CarController extends Controller
     {
         $car = Car::findOrFail($id);
         $car->fill($request->validated());
+        $car->save(); // Save the changes to the database
         $this->saveImage($car, $request);
         return response()->json($car, 200);
     }

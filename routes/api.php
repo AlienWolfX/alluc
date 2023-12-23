@@ -1,8 +1,5 @@
 <?php
 
-use App\Models\Staff;
-use App\Models\Payment;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CarController;
 use App\Http\Controllers\Api\AuthController;
