@@ -28,11 +28,12 @@ Route::middleware('auth:sanctum')->group(function() {
 
     // Client dapat ang maka login
     Route::controller(RentalController::class)->group(function () {
-        Route::get('/rentals', 'index')->name('rentals.index');
         Route::get('/rentals/{id}', 'show')->name('rentals.show');
         Route::post('/rentals', 'store')->name('rentals.store');
-        Route::put('/rentals/{id}', 'update')->name('rentals.update');
-        Route::delete('/rentals/{id}', 'destroy')->name('rentals.destroy');
+    });
+
+    Route::controller(PaymentController::class)->group(function () {
+        Route::post('/payments', 'store')->name('payments.store');
     });
 
     // Staff dapat ang maka login
@@ -41,6 +42,16 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::delete('/cars/{id}', 'destroy')->name('cars.destroy');
         Route::put('/cars/{id}', 'update')->name('cars.update');
         Route::put('/cars/image/{id}', 'image')->name('cars.image');
+    });
+
+    Route::controller(RentalController::class)->group(function () {
+        Route::get('/rentals', 'index')->name('rentals.index');
+        Route::put('/rentals/{id}', 'update')->name('rentals.update');
+        Route::delete('/rentals/{id}', 'destroy')->name('rentals.destroy');
+    });
+
+    Route::controller(PaymentController::class)->group(function () {
+        Route::get('/payments', 'index')->name('payments.index');
     });
 
     // Admin dapat ang maka login
@@ -60,11 +71,6 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::delete('/clients/{id}', 'destroy')->name('clients.destroy');
     });
 
-    // Payments
-    Route::controller(PaymentController::class)->group(function () {
-        Route::get('/payments', 'index')->name('payments.index');
-        Route::post('/payments', 'store')->name('payments.store');
-    });
 
     // User-specific update image
     Route::put('/profile/image', [ProfileController::class, 'image']);
