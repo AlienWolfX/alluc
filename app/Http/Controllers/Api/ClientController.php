@@ -43,7 +43,7 @@ class ClientController extends Controller
      */
     public function show(string $id)
     {
-        return Client::find($id);
+        return Client::findOrFail($id);
     }
 
     /**

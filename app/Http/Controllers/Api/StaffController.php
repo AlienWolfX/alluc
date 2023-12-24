@@ -41,7 +41,7 @@ class StaffController extends Controller
      */
     public function show(string $id)
     {
-        return Staff::find($id);
+        return Staff::findOrFail($id);
     }
 
     /**
